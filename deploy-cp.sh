@@ -37,7 +37,8 @@ export DATABASE_URL="postgres://budufkitteymek:095f0029056c313190744c68ca69d19a2
 export APP_CONFIG="production"
 export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
 export FLASK_APP=run.py
+printenv
 
 # Run the app
 echo ======= Launching the application server =======
-flask run --host 0.0.0.0 port 5000
+sudo python manage.py runserver --host 0.0.0.0 port 5000
