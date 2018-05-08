@@ -40,4 +40,4 @@ export FLASK_APP=run.py
 
 # Run the app
 echo ======= Launching the application server =======
-python manage.py runserver --host 0.0.0.0 port 5000
+python manage.py runserver --host 0.0.0.0 --port 5000
