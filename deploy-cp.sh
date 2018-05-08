@@ -39,5 +39,33 @@ export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
 export FLASK_APP=run.py
 
 # Run the app
-echo ======= Launching the application server =======
-python manage.py runserver --host 0.0.0.0 --port 5000
+# echo ======= Launching the application server =======
+# python manage.py runserver --host 0.0.0.0 --port 5000
+
+# Install nginx
+echo ======= Installing nginx =======
+sudo apt-get install -y nginx
+
+# Configure nginx routing
+echo ======= Configuring nginx =======
+echo ======= Removing default config =======
+sudo rm -rf /etc/nginx/sites-available/default
+sudo rm -rf /etc/nginx/sites-enabled/default
+echo ======= Replace config file =======
+sudo bash -c 'cat <<EOF> ./example
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name _;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000/;
+        proxy_set_header HOST $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+EOF'
+
