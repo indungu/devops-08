@@ -15,7 +15,7 @@ sudo apt-get install -y python3-pip
 
 # Install virtualenv
 echo ======= Installing virtualenv =======
-pip3 install -y virtualenv
+pip3 install virtualenv
 
 # Create virtual environment and activate it
 echo ======== Creating and activating virtual env =======
@@ -37,7 +37,6 @@ export DATABASE_URL="postgres://budufkitteymek:095f0029056c313190744c68ca69d19a2
 export APP_CONFIG="production"
 export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
 export FLASK_APP=run.py
-printenv
 
 # Run the app
 echo ======= Launching the application server =======
