@@ -52,7 +52,7 @@ echo ======= Removing default config =======
 sudo rm -rf /etc/nginx/sites-available/default
 sudo rm -rf /etc/nginx/sites-enabled/default
 echo ======= Replace config file =======
-sudo bash -c 'cat <<EOF> ./example
+sudo bash -c 'cat <<EOF> /etc/nginx/sites-available/default
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -61,11 +61,21 @@ server {
 
     location / {
         proxy_pass http://127.0.0.1:8000/;
-        proxy_set_header HOST $host;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header HOST \$host;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     }
 }
 EOF'
+
+echo ======= Copy the file to enabled sites =======
+cp /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+# Ensure nginx server is running
+echo ====== Checking nginx server status ========
+sudo systemctl status nginx
+
+# Serve the web app through gunicorn
+gunicorn app:APP
 
