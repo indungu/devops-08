@@ -1,6 +1,6 @@
 #! /bin/bash
 
-initialize_worker() {
+function initialize_worker() {
     printf "***************************************************\n\t\tSetting up host \n***************************************************\n"
     # Update packages
     echo ======= Updating packages ========
@@ -16,7 +16,7 @@ initialize_worker() {
     sudo apt-get install -y python3-pip
 }
 
-setup_python_venv() {
+function setup_python_venv() {
     printf "***************************************************\n\t\tSetting up Venv \n***************************************************\n"
     # Install virtualenv
     echo ======= Installing virtualenv =======
@@ -28,7 +28,7 @@ setup_python_venv() {
     source ./venv/bin/activate
 }
 
-clone_app_repository() {
+function clone_app_repository() {
     printf "***************************************************\n\t\tFetching App \n***************************************************\n"
     # Clone and access project directory
     echo ======== Cloning and accessing project directory ========
@@ -40,7 +40,7 @@ clone_app_repository() {
     fi
 }
 
-setup_app() {
+function setup_app() {
     printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
     # Install required packages
     echo ======= Installing required packages ========
@@ -55,7 +55,7 @@ setup_app() {
 }
 
 # Install and configure nginx
-setup_nginx() {
+function setup_nginx() {
     printf "***************************************************\n\t\tSetting up nginx \n***************************************************\n"
     echo ======= Installing nginx =======
     sudo apt-get install -y nginx
@@ -98,7 +98,7 @@ setup_nginx() {
 }
 
 # Serve the web app through gunicorn
-serve_app() {
+function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     gunicorn app:APP
 }
