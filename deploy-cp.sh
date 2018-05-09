@@ -100,7 +100,7 @@ function setup_nginx() {
 # Serve the web app through gunicorn
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    gunicorn app:APP
+    gunicorn app:APP -D
 }
 
 ######################################################################
