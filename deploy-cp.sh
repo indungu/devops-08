@@ -66,7 +66,7 @@ function setup_nginx() {
     sudo rm -rf /etc/nginx/sites-available/default
     sudo rm -rf /etc/nginx/sites-enabled/default
     echo ======= Replace config file =======
-    sudo bash -c 'cat <<EOF> /etc/nginx/sites-available/default
+    sudo bash -c 'cat <<EOF > /etc/nginx/sites-available/default
     server {
             listen 80 default_server;
             listen [::]:80 default_server;
@@ -86,14 +86,14 @@ function setup_nginx() {
                     proxy_set_header X-Real-IP $remote_addr;
                     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             }
-    }
-    EOF'
+    }'
 
     echo ======= Create a symbolic link of the file to sites-enabled =======
     sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
     # Ensure nginx server is running
     echo ====== Checking nginx server status ========
+    sudo systemctl restart nginx
     sudo systemctl status nginx -q
 }
 
@@ -104,7 +104,7 @@ function serve_app() {
 }
 
 ######################################################################
-########################      RUNTIME         ########################
+########################      RUNTIME       ##########################
 ######################################################################
 
 initialize_worker
@@ -113,5 +113,3 @@ clone_app_repository
 setup_app
 setup_nginx
 serve_app
-exit
-
