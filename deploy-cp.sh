@@ -107,11 +107,11 @@ function serve_app() {
 ########################      RUNTIME         ########################
 ######################################################################
 
-initialize_worker();
-setup_python_venv();
-clone_app_repository();
-setup_app();
-setup_nginx();
-serve_app();
+initialize_worker
+setup_python_venv
+clone_app_repository
+setup_app
+setup_nginx
+serve_app
 exit
 
