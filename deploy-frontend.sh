@@ -19,7 +19,7 @@ function initialize_worker() {
     # Install NodeJS and NPM
     echo ======= Installing NodeJS =======
     cd ~
-    sudo curl -sL https://deb.nodesource.com/setup_8.11.0 | bash
+    sudo curl -sL https://deb.nodesource.com/setup_8.x | bash
     sudo apt-get install -y nodejs
     node --version # Ensure NodeJS is installed
     npm --version # Ensure Node Package Manager CLI tool is installed as well
