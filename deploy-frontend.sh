@@ -19,7 +19,9 @@ function initialize_worker() {
     # Install NodeJS and NPM
     echo ======= Installing NodeJS =======
     cd ~
-    sudo curl -sL https://deb.nodesource.com/setup_8.x | bash
+    sudo curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+    cat nodesource_setup.sh
+    sudo bash nodesource_setup.sh
     sudo apt-get install -y nodejs
     node --version # Ensure NodeJS is installed
     npm --version # Ensure Node Package Manager CLI tool is installed as well
@@ -74,8 +76,8 @@ function setup_nginx() {
 
             location / {
                     # reverse proxy and serve the app
-                    # running on the localhost:3000
-                    proxy_pass http://127.0.0.1:3000/;
+                    # running on the localhost:5000
+                    proxy_pass http://127.0.0.1:5000/;
                     proxy_set_header HOST \$host;
                     proxy_set_header X-Forwarded-Proto \$scheme;
                     proxy_set_header X-Real-IP \$remote_addr;
@@ -97,7 +99,7 @@ function setup_nginx() {
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     yarn add global serve # Add serving package
-    serve ---silent --port 3000 build
+    serve ---silent --port 5000 build
 }
 
 ######################################################################
