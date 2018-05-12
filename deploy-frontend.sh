@@ -47,14 +47,9 @@ function setup_app() {
     \n***************************************************\n"
     # Install required packages
     echo ======= Installing required packages ========
-    if [[ -d ~/.yarn ]]; then
-        rm -rf ~/.yarn
-    else
-        sudo curl -o- -L https://yarnpkg.com/install.sh | bash # Installing yarn package manager
-    fi
+    npm install
     echo ======= Creating production build ========
-    yarn install
-    yarn build production
+    npm build production
 }
 
 # Install and configure nginx
@@ -105,7 +100,7 @@ function setup_nginx() {
 # Serve the web app through gunicorn
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    yarn add global serve # Add serving package
+    npm install --global serve # Add serving package
     serve ---silent --port 5000 build
 }
 
