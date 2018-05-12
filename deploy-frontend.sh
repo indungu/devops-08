@@ -47,9 +47,10 @@ function setup_app() {
     \n***************************************************\n"
     # Install required packages
     echo ======= Installing required packages ========
-    npm install
+    sudo npm install --global yarn
+    sudo yarn install
     echo ======= Creating production build ========
-    npm build production
+    sudo yarn build production
 }
 
 # Install and configure nginx
@@ -100,8 +101,8 @@ function setup_nginx() {
 # Serve the web app through gunicorn
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    npm install --global serve # Add serving package
-    serve ---silent --port 5000 build
+    sudo yarn add global serve # Add serving package
+    sudo serve ---silent --port 5000 build
 }
 
 ######################################################################
