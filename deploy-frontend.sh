@@ -101,7 +101,7 @@ function setup_nginx() {
 # Serve the web app through gunicorn
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-    sudo yarn add global serve # Add serving package
+    sudo npm install --global serve # Add serving package
     sudo serve ---silent --port 5000 build
 }
 
