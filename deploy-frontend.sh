@@ -47,9 +47,13 @@ function setup_app() {
     \n***************************************************\n"
     # Install required packages
     echo ======= Installing required packages ========
-    curl -o- -L https://yarnpkg.com/install.sh | bash # Installing yarn package manager
-    yarn install
+    if [[ -d ~/.yarn ]]; then
+        rm -rf ~/.yarn
+    else
+        sudo curl -o- -L https://yarnpkg.com/install.sh | bash # Installing yarn package manager
+    fi
     echo ======= Creating production build ========
+    yarn install
     yarn build production
 }
 
