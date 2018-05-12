@@ -10,6 +10,7 @@ function initialize_worker() {
     # Update packages
     echo ======= Updating packages ========
     sudo apt-get update
+    sudo apt install -y xsel
 
     # Export language locale settings
     echo ======= Exporting language locale settings =======
