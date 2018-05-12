@@ -99,3 +99,13 @@ function serve_app() {
     yarn add global serve # Add serving package
     serve ---silent --port 3000 build
 }
+
+######################################################################
+########################      RUNTIME       ##########################
+######################################################################
+
+initialize_worker
+clone_app_repository
+setup_app
+setup_nginx
+serve_app
