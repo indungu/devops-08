@@ -102,7 +102,7 @@ function setup_nginx() {
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     sudo npm install --global serve # Add serving package
-    sudo serve ---silent --port 5000 build
+    sudo serve --silent --port 5000 build
 }
 
 ######################################################################
