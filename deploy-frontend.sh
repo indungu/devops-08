@@ -35,10 +35,9 @@ function clone_app_repository() {
     echo ======== Cloning and accessing project directory ========
     if [[ -d ~/yummy-react ]]; then
         sudo rm -rf ~/yummy-react
-    else
-        git clone -b develop https://github.com/indungu/yummy-react.git ~/yummy-react
-        cd ~/yummy-react/
     fi
+    git clone -b develop https://github.com/indungu/yummy-react.git ~/yummy-react
+    cd ~/yummy-react/
 }
 
 function setup_app() {
