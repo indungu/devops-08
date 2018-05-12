@@ -71,10 +71,6 @@ function setup_nginx() {
             listen 80 default_server;
             listen [::]:80 default_server;
 
-            # include snippets/snakeoil.conf;
-
-            root /var/www/html;
-
             server_name _;
 
             location / {
@@ -94,7 +90,7 @@ function setup_nginx() {
     # Ensure nginx server is running
     echo ====== Checking nginx server status ========
     sudo systemctl restart nginx
-    sudo systemctl status nginx -q
+    sudo nginx -t
 }
 
 # Serve the web app through gunicorn
