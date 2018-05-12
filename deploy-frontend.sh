@@ -67,8 +67,8 @@ function setup_nginx() {
     sudo rm -rf /etc/nginx/sites-available/default
     sudo rm -rf /etc/nginx/sites-enabled/default
     if [[ /etc/nginx/sites-available/yummyreact ]]; then 
-        rm -f /etc/nginx/sites-available/yummyreact
-        /etc/nginx/sites-enabled/yummyreact
+        sudo rm -f /etc/nginx/sites-available/yummyreact
+        sudo rm -f /etc/nginx/sites-enabled/yummyreact
     fi
     echo ======= Replace config file =======
     sudo bash -c 'cat > /etc/nginx/sites-available/yummyreact <<EOF
