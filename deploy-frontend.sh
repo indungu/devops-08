@@ -10,7 +10,6 @@ function initialize_worker() {
     # Update packages
     echo ======= Updating packages ========
     sudo apt-get update
-    sudo apt install -y xsel
 
     # Export language locale settings
     echo ======= Exporting language locale settings =======
@@ -103,6 +102,7 @@ function setup_nginx() {
 function serve_app() {
     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
     sudo npm install --global serve # Add serving package
+    sudo apt install -y xsel
     sudo serve --silent --port 5000 build
 }
 
