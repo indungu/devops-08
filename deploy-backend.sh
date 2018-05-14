@@ -34,6 +34,8 @@ function clone_app_repository() {
     echo ======== Cloning and accessing project directory ========
     if [[ -d ~/yummy-rest ]]; then
         sudo rm -rf ~/yummy-rest
+        git clone -b develop https://github.com/indungu/yummy-rest.git ~/yummy-rest
+        cd ~/yummy-rest/
     else
         git clone -b develop https://github.com/indungu/yummy-rest.git ~/yummy-rest
         cd ~/yummy-rest/
