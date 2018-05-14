@@ -131,6 +131,7 @@ function configure_startup_service () {
     [Service]
     User=ubuntu
     ExecStart=/bin/bash /home/ubuntu/launch.sh
+    Restart=always
 
     [Install]
     WantedBy=multi-user.target
