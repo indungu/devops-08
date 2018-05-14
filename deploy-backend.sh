@@ -106,9 +106,7 @@ EOF'
 
 # Add a launch script
 function create_launch_script () {
-    printf "***************************************************
-    \t\tCreating a Launch script 
-    ***************************************************\n"
+    printf "***************************************************\n\t\tCreating a Launch script \n***************************************************\n"
 
     sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
@@ -124,9 +122,7 @@ EOF
 }
 
 function configure_startup_service () {
-    printf "***************************************************
-    \t\tConfiguring startup service 
-    ***************************************************\n"
+    printf "***************************************************\n\t\tConfiguring startup service \n***************************************************\n"
 
     sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
     [Unit]
@@ -134,7 +130,7 @@ function configure_startup_service () {
     After=network.target
     [Service]
     User=ubuntu
-    ExecStart=/home/ubuntu/launch.sh
+    ExecStart=/bin/bash ~/launch.sh
     Restart=always
     [Install]
     WantedBy=multi-user.target
