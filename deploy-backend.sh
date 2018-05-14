@@ -95,9 +95,9 @@ function setup_nginx() {
 
 # Add a launch script
 function create_launch_script () {
-    printf 'printf "***************************************************\n\t\t
+    printf "***************************************************\n\t\t
     Creating a Launch script 
-    \n***************************************************\n'
+    \n***************************************************\n"
 
     sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
@@ -110,9 +110,9 @@ EOF
 }
 
 function configure_startup_service () {
-    printf '***************************************************\n\t\t
+    printf "***************************************************\n\t\t
     Configuring startup service 
-    \n***************************************************\n'
+    \n***************************************************\n"
 
     sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
     [Unit]
@@ -120,7 +120,7 @@ function configure_startup_service () {
     After=network.target
     [Service]
     User=ubuntu
-    ExecStart=/bin/bash ~/launch.sh
+    ExecStart=/home/ubuntu/launch.sh
     Restart=always
     [Install]
     WantedBy=multi-user.target
