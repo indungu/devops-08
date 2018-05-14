@@ -131,7 +131,6 @@ function configure_startup_service () {
     [Service]
     User=ubuntu
     ExecStart=/bin/bash /home/ubuntu/launch.sh
-    Restart=always
 
     [Install]
     WantedBy=multi-user.target
@@ -142,14 +141,13 @@ EOF'
     sudo systemctl enable yummy-rest.service
     sudo systemctl start yummy-rest.service
     sudo service yummy-rest status
-
 }
 
-# Serve the web app through gunicorn
-# function serve_app() {
-#     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
-#     gunicorn app:APP -D
-# }
+Serve the web app through gunicorn
+function launch_app() {
+    printf "***************************************************\n\t\tServing the App \n***************************************************\n"
+    sudo bash /home/ubuntu/launch.sh
+}
 
 ######################################################################
 ########################      RUNTIME       ##########################
@@ -162,3 +160,4 @@ setup_app
 setup_nginx
 create_launch_script
 configure_startup_service
+launch_app
