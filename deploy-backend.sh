@@ -115,7 +115,7 @@ function create_launch_script () {
     source ~/venv/bin/activate
     gunicorn app:APP -D
 EOF
-    sudo chmod u+x /home/ubuntu/launch.sh
+    sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
     ls -la ~/launch.sh
 }
