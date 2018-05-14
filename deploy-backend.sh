@@ -92,7 +92,8 @@ function setup_nginx() {
                     proxy_set_header X-Real-IP \$remote_addr;
                     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
             }
-    }'
+    }
+EOF'
 
     echo ======= Create a symbolic link of the file to sites-enabled =======
     sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
@@ -105,24 +106,27 @@ function setup_nginx() {
 
 # Add a launch script
 function create_launch_script () {
-    printf "***************************************************\n\t\t
-    Creating a Launch script 
-    \n***************************************************\n"
+    printf "***************************************************
+    \t\tCreating a Launch script 
+    ***************************************************\n"
 
     sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
     cd ~/yummy-rest
+    pwd
     source ~/.env
+    printenv
     source ~/venv/bin/activate
+    Flask --version
     gunicorn app:APP -D
 EOF
     sudo chmod +x ~/launch.sh
 }
 
 function configure_startup_service () {
-    printf "***************************************************\n\t\t
-    Configuring startup service 
-    \n***************************************************\n"
+    printf "***************************************************
+    \t\tConfiguring startup service 
+    ***************************************************\n"
 
     sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
     [Unit]
