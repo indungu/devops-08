@@ -114,7 +114,7 @@ function configure_startup_service () {
     Configuring startup service 
     \n***************************************************\n'
 
-    sudo cat > /etc/systemd/system/yummy-rest.service <<EOF
+    sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
     [Unit]
     Description=yummy-rest startup service
     After=network.target
@@ -124,7 +124,7 @@ function configure_startup_service () {
     Restart=always
     [Install]
     WantedBy=multi-user.target
-EOF
+EOF'
 
     sudo chmod 664 /etc/systemd/system/yummy-rest.service
     sudo systemctl daemon-reload
