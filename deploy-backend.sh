@@ -96,15 +96,16 @@ function setup_nginx() {
 # Add a launch script
 function create_launch_script () {
     printf 'printf "***************************************************\n\t\t
-    Createing a Launch script 
+    Creating a Launch script 
     \n***************************************************\n'
 
-    sudo bash -c 'cat > ~/launch.sh << EOF
+    sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
     cd ~/yummy-rest
     source ~/venv/bin/activate
     gunicorn app:APP -D
-    '
+EOF
+    cat ~/launch.sh
     sudo chmod +x ~/launch.sh
 }
 
@@ -113,7 +114,7 @@ function configure_startup_service () {
     Configuring startup service 
     \n***************************************************\n'
 
-    sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
+    sudo cat > /etc/systemd/system/yummy-rest.service <<EOF
     [Unit]
     Description=yummy-rest startup service
     After=network.target
@@ -123,12 +124,12 @@ function configure_startup_service () {
     Restart=always
     [Install]
     WantedBy=multi-user.target
-    '
+EOF
 
     sudo chmod 664 /etc/systemd/system/yummy-rest.service
     sudo systemctl daemon-reload
-    sudo systemctl enable yummy.service
-    sudo systemctl start yummy.service
+    sudo systemctl enable yummy-rest.service
+    sudo systemctl start yummy-rest.service
 
 }
 
