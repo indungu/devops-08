@@ -108,14 +108,16 @@ EOF'
 function create_launch_script () {
     printf "***************************************************\n\t\tCreating a Launch script \n***************************************************\n"
 
-    sudo cat > ~/launch.sh <<EOF
+    sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
     cd ~/yummy-rest
     source ~/.env
     source ~/venv/bin/activate
     gunicorn app:APP -D
 EOF
-    sudo chmod +x ~/launch.sh
+    sudo chmod u+x /home/ubuntu/launch.sh
+    echo ====== Ensuring script is executable =======
+    ls -la ~/launch.sh
 }
 
 function configure_startup_service () {
@@ -130,7 +132,7 @@ function configure_startup_service () {
     User=ubuntu
     ExecStart=/bin/bash /home/ubuntu/launch.sh
     Restart=always
-    
+
     [Install]
     WantedBy=multi-user.target
 EOF'
@@ -139,6 +141,7 @@ EOF'
     sudo systemctl daemon-reload
     sudo systemctl enable yummy-rest.service
     sudo systemctl start yummy-rest.service
+    sudo service yummy-rest status
 
 }
 
