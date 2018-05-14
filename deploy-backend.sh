@@ -111,11 +111,8 @@ function create_launch_script () {
     sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
     cd ~/yummy-rest
-    pwd
     source ~/.env
-    printenv
     source ~/venv/bin/activate
-    Flask --version
     gunicorn app:APP -D
 EOF
     sudo chmod +x ~/launch.sh
