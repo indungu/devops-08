@@ -93,11 +93,50 @@ function setup_nginx() {
     sudo nginx -t
 }
 
-# Serve the web app through gunicorn
-function serve_app() {
-    printf "***************************************************\n\t\tServing the App \n***************************************************\n"
+# Add a launch script
+function create_launch_script () {
+    printf 'printf "***************************************************\n\t\t
+    Createing a Launch script 
+    \n***************************************************\n'
+
+    sudo bash -c 'cat > ~/launch.sh << EOF
+    #!/bin/bash
+    cd ~/yummy-rest
+    source ~/venv/bin/activate
     gunicorn app:APP -D
+    '
+    sudo chmod +x ~/launch.sh
 }
+
+function configure_startup_service () {
+    printf '***************************************************\n\t\t
+    Configuring startup service 
+    \n***************************************************\n'
+
+    sudo bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
+    [Unit]
+    Description=yummy-rest startup service
+    After=network.target
+    [Service]
+    User=ubuntu
+    ExecStart=/bin/bash ~/launch.sh
+    Restart=always
+    [Install]
+    WantedBy=multi-user.target
+    '
+
+    sudo chmod 664 /etc/systemd/system/yummy-rest.service
+    sudo systemctl daemon-reload
+    sudo systemctl enable yummy.service
+    sudo systemctl start yummy.service
+
+}
+
+# Serve the web app through gunicorn
+# function serve_app() {
+#     printf "***************************************************\n\t\tServing the App \n***************************************************\n"
+#     gunicorn app:APP -D
+# }
 
 ######################################################################
 ########################      RUNTIME       ##########################
@@ -108,4 +147,5 @@ setup_python_venv
 clone_app_repository
 setup_app
 setup_nginx
-serve_app
+create_launch_script
+configure_startup_service
