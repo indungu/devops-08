@@ -63,8 +63,8 @@ function setup_nginx() {
     # Configure nginx routing
     echo ======= Configuring nginx =======
     echo ======= Removing default config =======
-    sudo rm -rf /etc/nginx/sites-available/default
-    sudo rm -rf /etc/nginx/sites-enabled/default
+    sudo rm -f /etc/nginx/sites-available/*
+    sudo rm -f /etc/nginx/sites-enabled/*
     if [[ /etc/nginx/sites-available/yummyreact ]]; then 
         sudo rm -f /etc/nginx/sites-available/yummyreact
         sudo rm -f /etc/nginx/sites-enabled/yummyreact
