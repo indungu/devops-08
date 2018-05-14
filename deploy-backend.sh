@@ -125,10 +125,12 @@ function configure_startup_service () {
     [Unit]
     Description=yummy-rest startup service
     After=network.target
+
     [Service]
     User=ubuntu
-    ExecStart=/bin/bash ~/launch.sh
+    ExecStart=/bin/bash /home/ubuntu/launch.sh
     Restart=always
+    
     [Install]
     WantedBy=multi-user.target
 EOF'
