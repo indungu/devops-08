@@ -70,7 +70,7 @@ function setup_nginx() {
         sudo rm -f /etc/nginx/sites-enabled/yummyreact
     fi
     echo ======= Replace config file =======
-    sudo bash -c 'cat > /etc/nginx/sites-available/yummyreact <<EOF
+    sudo bash -c 'cat > /etc/nginx/sites-available/yummyreact << EOF
     server {
             listen 80 default_server;
             listen [::]:80 default_server;
@@ -86,7 +86,7 @@ function setup_nginx() {
                     proxy_set_header X-Real-IP \$remote_addr;
                     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
             }
-    }EOF'
+    }'
 
     echo ======= Create a symbolic link of the file to sites-enabled =======
     sudo ln -s /etc/nginx/sites-available/yummyreact /etc/nginx/sites-enabled/
