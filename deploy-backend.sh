@@ -44,16 +44,24 @@ function clone_app_repository() {
 
 function setup_app() {
     printf "***************************************************\n    Installing App dependencies and Env Variables \n***************************************************\n"
+    setup_env
     # Install required packages
     echo ======= Installing required packages ========
     pip install -r requirements.txt
 
-    # Export required environment variable
+}
+
+# Create and Export required environment variable
+function setup_env() {
     echo ======= Exporting the necessary environment variables ========
+    sudo cat > ~/.env << EOF
     export DATABASE_URL="postgres://budufkitteymek:095f0029056c313190744c68ca69d19a2e315483bc41e059b40d6d9fdccf2599@ec2-107-22-229-213.compute-1.amazonaws.com:5432/d2r8p5ai580nqq"
     export APP_CONFIG="production"
     export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
     export FLASK_APP=run.py
+EOF
+    echo ======= Exporting the necessary environment variables ========
+    source ~/.env
 }
 
 # Install and configure nginx
@@ -104,10 +112,10 @@ function create_launch_script () {
     sudo cat > ~/launch.sh <<EOF
     #!/bin/bash
     cd ~/yummy-rest
+    source ~/.env
     source ~/venv/bin/activate
     gunicorn app:APP -D
 EOF
-    cat ~/launch.sh
     sudo chmod +x ~/launch.sh
 }
 
