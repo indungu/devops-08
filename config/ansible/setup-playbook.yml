@@ -4,6 +4,9 @@
 - hosts: all
   become: yes
   become_method: sudo
+  remote_user: ubuntu
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
   tasks:
     - name: Ensure appropriate locale is set
       locale_gen:
