@@ -1,0 +1,53 @@
+---
+# A simple Ansible setup
+
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Ensure appropriate locale is set
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
+
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+
+    - name: Installing python3-pip and nginx
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_item:
+        - python3-pip
+        - nginx
+
+    - name: Configuring nginx startup service
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+
+    - name: Creating App Directory
+      file:
+        path: /home/ubuntu/yummy
+        state: directory
+
+    - name: Cloning app repository
+      git:
+        repo: https://github.com/indungu/yummy-rest.git
+        dest: /home/ubuntu/yummy
+
+    - name: Installing up virtualenv
+      command: pip3 install virtualenv
+      
+    - name: Creating virtualenv
+      command: virtualenv /home/ubuntu/yummy/yummy-venv
+
+    - name: Initializing virtual environment
+      pip:
+        requirements: /home/ubuntu/yummy/yummy-rest/requirements.txt
+        virtualenv: /home/ubuntu/yummy/yummy-venv
+
+...
