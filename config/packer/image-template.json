@@ -19,7 +19,7 @@
     }],
     "provisioners": [
         {
-            "type": "ansible-local",
+            "type": "ansible",
             "playbook_file": "../ansible/setup-playbook.yml"
         }
     ]
