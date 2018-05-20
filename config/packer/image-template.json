@@ -15,6 +15,11 @@
       "run_tags": {
         "name": "ubuntu-xenial-ansible",
         "role": "ub-1604"
+      },
+      "tags": {
+        "name": "Packer-Ansible Demo",
+        "role": "ub-1604-image",
+        "version": "v1.0"
       }
     }],
     "provisioners": [
