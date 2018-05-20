@@ -110,10 +110,11 @@ function create_launch_script () {
 
     sudo cat > /home/ubuntu/launch.sh <<EOF
     #!/bin/bash
-    cd ~/yummy-rest
-    source ~/.env
-    source ~/venv/bin/activate
-    gunicorn app:APP -D
+    cd /home/ubuntu/yummy-rest
+    source /home/ubuntu/.env
+    source /home/ubuntu/venv/bin/activate
+    pip show flask
+    gunicorn app:APP
 EOF
     sudo chmod 744 /home/ubuntu/launch.sh
     echo ====== Ensuring script is executable =======
