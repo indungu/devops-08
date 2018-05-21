@@ -1,0 +1,39 @@
+---
+- name: Cloning app repository
+  git:
+    repo: https://github.com/indungu/yummy-rest.git
+    dest: /home/ubuntu/yummy-rest
+    update: yes
+
+- name: Installing up virtualenv
+  command: pip3 install virtualenv
+    
+- name: Creating virtualenv
+  command: virtualenv /home/ubuntu/yummy-venv
+
+- name: Initializing virtual environment
+  pip:
+    requirements: /home/ubuntu/yummy-rest/requirements.txt
+    virtualenv: /home/ubuntu/yummy-venv
+
+- name: Creating environment setup file
+  shell:
+    chdir: /home/ubuntu/
+    creates: .env
+    cmd: |
+        bash -c 'cat > /home/ubuntu/.env << EOF
+        export DATABASE_URL="postgres://budufkitteymek:095f0029056c313190744c68ca69d19a2e315483bc41e059b40d6d9fdccf2599@ec2-107-22-229-213.compute-1.amazonaws.com:5432/d2r8p5ai580nqq"
+        export APP_CONFIG="production"
+        export SECRET_KEY="mYd3rTyL!tTl#sEcR3t"
+        export FLASK_APP=run.py
+        EOF'
+
+- name: Creating App Launch Script
+  shell: |
+    bash -c 'cat > /home/ubuntu/launch.sh << EOF
+        source /home/ubuntu/.env
+        source /home/ubuntu/yummy-venv/bin/activate
+        gunicorn --chdir /home/ubuntu/yummy-rest --bind 0.0.0.0:8000 app:APP
+    EOF'
+    chmod 744 /home/ubuntu/launch.sh
+...

@@ -1,0 +1,23 @@
+---
+- name: Creating App startup service
+  shell: |
+    bash -c 'cat > /etc/systemd/system/yummy-rest.service <<EOF
+        [Unit]
+        Description=yummy-rest startup service
+        After=network.target
+
+        [Service]
+        User=ubuntu
+        ExecStart=/bin/bash /home/ubuntu/launch.sh
+
+        [Install]
+        WantedBy=multi-user.target
+    EOF'
+    chmod 664 /etc/systemd/system/yummy-rest.service
+
+- name: Configuring service to run on reboot
+  service:
+    name: yummy-rest
+    enabled: yes
+    state: started
+...
