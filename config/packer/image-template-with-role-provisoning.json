@@ -1,0 +1,31 @@
+{
+    "variables": {
+      "aws_access_key": "{{env `aws_access_key`}}",
+      "aws_secret_key": "{{env `aws_secret_key`}}"
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-2",
+      "source_ami": "ami-916f59f4",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer-example {{timestamp}}",
+      "run_tags": {
+        "name": "ubuntu-xenial-ansible",
+        "role": "ub-1604"
+      },
+      "tags": {
+        "name": "Packer-Ansible Demo",
+        "role": "ub-1604-image",
+        "version": "v1.0"
+      }
+    }],
+    "provisioners": [
+        {
+            "type": "ansible",
+            "playbook_file": "../ansible/setup-playbook-with-roles.yml"
+        }
+    ]
+  }
