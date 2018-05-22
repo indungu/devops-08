@@ -20,5 +20,5 @@ Create an AWS EC2 instance of the Ubuntu Server 16.04 and ensure the following i
     ```bash
     source setup/deploy-backend.sh
     ```
-4. Close the `gunicorn` and exit the shell connection
+4. Exit the shell connection
 
