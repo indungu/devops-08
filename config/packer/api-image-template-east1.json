@@ -19,7 +19,8 @@
       "tags": {
         "name": "Packer-Ansible Demo",
         "role": "ub-1604-image",
-        "version": "v1.0"
+        "version": "v1.0",
+        "Name": "yummy-rest-image"
       }
     }],
     "provisioners": [
